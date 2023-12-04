@@ -60,6 +60,9 @@ jobs:
           # scanMetadataReportFile: D:\a\sonar\sonar\.sonarqube\out\.sonar\report-task.txt
         env:
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+         SONAR_HOST_URL: "https://sonarcloud.io"
+         SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
+         SONAR_KEY: "encamina_test-github"
   
       # Optionally you can use the output from the Quality Gate in another step.
       # The possible outputs of the `quality-gate-status` variable are `PASSED`, `WARN` or `FAILED`.
