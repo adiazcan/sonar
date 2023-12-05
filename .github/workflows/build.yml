@@ -5,6 +5,10 @@ on:
       - main # the name of your main branch
   pull_request:
     types: [opened, synchronize, reopened]
+    
+permissions:
+  pull-requests: read # allows SonarCloud to decorate PRs with analysis results
+  
 jobs:
   build:
     name: Build
@@ -48,4 +52,8 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"encamina_test-github" /o:"${{ secrets.SONAR_ORGANIZATION }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.scanner.metadataFilePath=D:\a\sonar\sonar\.sonarqube\out\.sonar\report-task.txt
           dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          
+      - name: Sonarqube end
+        run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
