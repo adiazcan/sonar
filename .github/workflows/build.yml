@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"encamina_test-github" /o:"${{ secrets.SONAR_ORGANIZATION }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.pullrequest.key=${{ github.event.pull_request.number }} /d:sonar.pullrequest.branch=${{ github.event.pull_request.head_ref }} cloud.io" /d:sonar.scanner.metadataFilePath=D:\a\sonar\sonar\.sonarqube\out\.sonar\report
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"encamina_test-github" /o:"${{ secrets.SONAR_ORGANIZATION }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.pullrequest.key=${{ github.event.pull_request.number }} /d:sonar.pullrequest.branch=${{ github.event.pull_request.head_ref }} /d:sonar.scanner.metadataFilePath=D:\a\sonar\sonar\.sonarqube\out\.sonar\report
           dotnet build
           
       - name: Sonarqube end
